@@ -1,9 +1,10 @@
 package io.cis.log;
 
 
-import java.io.PrintStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.PrintStream;
 
 /*
  * Re-wire the standard out/err logs to logger
@@ -16,7 +17,7 @@ import org.slf4j.LoggerFactory;
 public enum StdOutErrLogger {
 	INSTANCE;
 
-	private StdOutErrLogger() {
+	StdOutErrLogger() {
 		final Logger logger = LoggerFactory.getLogger(StdOutErrLogger.class);
 
 		System.setOut(new PrintStream(System.out) {
