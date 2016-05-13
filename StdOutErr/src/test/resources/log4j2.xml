@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" strict="true" name="StdOutErrLogConfig"
+               packages="org.apache.logging.log4j.test">
+
+
+  <Appenders>
+    <!-- stdout appender -->
+    <Appender type="Console" name="Console">
+      <Layout type="PatternLayout" pattern="%m%n"/>
+    </Appender>
+
+    <!-- default file appender --> 
+    <RollingFile name="Main" fileName="logs/logging.log"
+                 filePattern="logs/$${date:yyyy-MM}/logging-%d{MM-dd-yyyy}-%i.log.gz">
+      <PatternLayout>
+        <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy />
+        <SizeBasedTriggeringPolicy size="100 MB"/>
+      </Policies>
+    </RollingFile>
+
+    <!-- rolling file appender -->
+    <Appender type="File" name="ExtraLog" fileName="logs/extra.log">
+      <Layout type="PatternLayout">
+        <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+      </Layout>
+    </Appender>
+
+
+    <!-- default file appender --> 
+    <RollingFile type="File" name="StdOutErrLogger" fileName="logs/stdouterr.log"
+                 filePattern="logs/stdouterr-%i.log.gz">
+      <PatternLayout>
+        <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <SizeBasedTriggeringPolicy size="100 MB"/>
+      </Policies>
+    </RollingFile>
+
+  </Appenders>
+ 
+
+ 
+  <Loggers>
+    <!-- root log - writes to stdout and to file -->
+    <Root level="debug">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="Main"/>
+    </Root>
+
+    <!-- named loggger - writes to a Rolling log file -->
+    <Logger name="namedlogger" level="debug" additivity="false">
+      <AppenderRef ref="ExtraLog"/>
+    </Logger>
+ 
+    <Logger name="io.cis.log.StdOutErrLogger" level="debug" additivity="true">
+      <AppenderRef ref="StdOutErrLogger"/>
+    </Logger>
+ 
+  </Loggers>
+ 
+</Configuration>

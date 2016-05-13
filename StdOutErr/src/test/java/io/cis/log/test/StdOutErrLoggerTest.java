@@ -1,23 +1,12 @@
 package io.cis.log.test;
 
 
-import static org.junit.Assert.*;
 import io.cis.log.StdOutErrLogger;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.*;
 
 /**
  * Test stdout and stderr redirecton using slf4j / log4j 
@@ -27,9 +16,9 @@ import org.slf4j.LoggerFactory;
  */
 public class StdOutErrLoggerTest {
 	// three log file names
-	static String rootLogFileName = "logging.log";
-	static String extraLogFileName = "extra.log";
-	static String stdLogFileName = "stdouterr.log";
+	static String rootLogFileName = "logs/logging.log";
+	static String extraLogFileName = "logs/extra.log";
+	static String stdLogFileName = "logs/stdouterr.log";
 
 	String myExceptionText = "my exception";
 
